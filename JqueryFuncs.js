@@ -6,9 +6,9 @@
 			var defaults = {
 				key1 : "value1",
 				key2 : "value2",
-			}
+			};
 			//默认值,第2个和第3个参数依次覆盖到第1个参数上,若覆盖对象为空,则不改变被覆盖对象原有值
-			var params = $.extend({},defaults,params);
+			var Params = $.extend({},defaults,params);
 			//若不支持链式调用,则这里不需return
 			return this.each(function(){
 				var $this = $(this);
@@ -27,6 +27,20 @@
 					funcBack();
 				}
 			});
+		},
+		// 判断非空
+		isEmpty:function(params){
+			params = $.trim(params);
+			if(null === params){
+				return true;
+			}else if(undefined === params || "undefined" === params){
+				return true;
+			}else if(0 === params.length){
+				return true;
+			}else if(!/[^(^\s*)|(\s*$)]/.test(params)){
+				return true;
+			}
+			return false;
 		}
 	});
-})(window.jQuery)
+})(window.jQuery);
