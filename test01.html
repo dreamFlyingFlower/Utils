@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>测试页面01</title>
+	<link rel="stylesheet" href="css/common.css">
+	<script src="js/jquery.min.js" type="text/javascript" ></script>
+	<script src="js/Utils.js" type="text/javascript"></script>
+	<style type="text/css" media="screen">
+		nav ul li a{
+			font-size: 1rem;
+		}
+	</style>
+</head>
+<body>
+	<header>头部</header>
+	<nav>
+		<ul>
+			<li><a href="" title="">这是干嘛</a></li>
+			<li><a id="a1" href="#">不晓得</a></li>
+		</ul>
+	</nav>
+	<div id="container">
+		<div id="d1">
+			<input type="button" value="点击">
+		</div>
+		<input id="p" style="width:500px;" value="请选择">
+		<table id="t1" style="width:502px"></table>
+		<input type="text" id="p" placeholder="这是一个test">
+	</div>
+	<script  type="text/javascript">
+		$(function(){
+			var p = document.getElementById("p");
+			p.value = "真的?";
+			var a1 = document.getElementById("a1");
+			a1.onclick = function(){
+				console.log(111);
+			};
+			var o = {
+				"key33":"ere",
+				"key343":"rer"
+			};
+			sessionStorage.setItem("key1","valuw1");
+			sessionStorage.setItem("key2","valuw3");
+			sessionStorage.setItem("key5","valuw4");
+			localStorage.setItem("key1",JSON.stringify(o));
+			localStorage.setItem("key2","valuw31");
+			localStorage.setItem("key5","valuw41");
+			sessionStorage.removeItem("key1");
+			console.log(sessionStorage.key(1));
+			console.log(sessionStorage.getItem("key1"));
+			console.log(JSON.parse(localStorage.getItem("key1")));
+		});
+	</script>
+</body>
+</html>

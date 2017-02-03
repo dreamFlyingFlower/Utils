@@ -9,7 +9,7 @@
  	Ualert.id = 'Ualert';
  	Ualert.className = 'Ualert';
  	strHtml = "<ul style='list-style:none;margin:0px;padding:0px;width:100%'>";
-	strHtml += " <li>[倍儿忙网系统提示]</li>";
+	strHtml += " <li>[系统提示]</li>";
 	strHtml += " <li style='background:#fff;text-align:center;font-size:12px;height:120px;line-height:120px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;'>"+txt+"</li>";
 	strHtml += " <li style='background:#FDEEF4;text-align:center;font-weight:bold;height:25px;line-height:25px; border:1px solid #F9CADE;'><input type='button' value='确 定' onclick='doOk()' /></li>";
 	strHtml += "</ul>";
@@ -447,6 +447,11 @@ function isEmpty(params){
 	}
 	return false;
 }
+/**
+ * [enterDown 敲击回车事件触发]
+ * @param  {[type]} event    [description]
+ * @param  {[type]} funcBack [description]
+ */
 function enterDown(event,funcBack){
 	$(document).keydown(function(){
 		var Event = event ? event : window.event;
@@ -455,4 +460,73 @@ function enterDown(event,funcBack){
 			funcBack();
 		}
 	});
+}
+/**
+ * [storage session存储数据]
+ * @param  {[type]} key     [description]
+ * @param  {[type]} value   [description]
+ * @param  {[type]} boolean [不传或false则为sessionstorage,为true则为localStorage]
+ */
+function setStorage(key,value,boolean){
+	if(!boolean){
+		if(isEmptyObject(value)){
+			sessionStorage.setItem(key,value);
+		}else{
+			sessionStorage.setItem(key,JSON.stringify(value));
+		}
+	}else{
+		if(isEmptyObject(value)){
+			localStorage.setItem(key,value);
+		}else{
+			localStorage.setItem(key,JSON.stringify(value));
+		}
+	}
+}
+function getStorage(key,boolean){
+	if(!boolean){
+		if(isEmptyObject(key)){
+			return sessionStorage.getItem(key);
+		}else{
+			return JSON.parse(sessionStorage.getItem(key));
+		}
+	}else{
+		if(isEmptyObject(key)){
+			return localStorage.getItem(key);
+		}else{
+			return JSON.parse(localStorage.getItem(key));
+		}
+	}
+}
+function removeStorage(key,boolean){
+	if(!boolean){
+		sessionStorage.removeItem(key);
+	}else{
+		localStorage.removeItem(key);
+	}
+}
+function clearStorage(boolean){
+	if(!boolean){
+		sessionStorage.clear();
+	}else{
+		localStorage.clear();
+	}
+}
+function lengthStorage(boolean){
+	if(!boolean){
+		return sessionStorage.length;
+	}else{
+		return localStorage.length;
+	}
+}
+/**
+ * [getStorage 获得storage中指定下标的key值,0开始]
+ * @param  {[type]} index   [description]
+ * @param  {[type]} boolean [description]
+ */
+function keyStorage(index,boolean){
+	if(!boolean){
+		return sessionStorage.key(index);
+	}else{
+		return localStorage.key(index);
+	}
 }
