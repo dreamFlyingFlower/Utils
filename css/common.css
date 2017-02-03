@@ -1,0 +1,17 @@
+body{
+	/**
+	 * [font 字体设置]
+	 * 样式,粗细,大小/行高,字体系列
+	 */
+	font:1.2rem "微软雅黑",Arial,"宋体";
+}
+ul,li{
+	margin:0;
+	padding:0;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
