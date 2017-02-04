@@ -1,5 +1,5 @@
 /*!
- * 工具类，不需引入jquery.min.js，可能存在不兼容问题
+ * 工具类，不需引入jquery，可能存在不兼容问题
  */
  function Ualert(txt){
  	var shield = document.createElement('DIV');
@@ -263,11 +263,11 @@ function addURLParam(url,name,value){
  * [buddle 对象数组冒泡排序]
  * @param  {[对象数组]} arr 		[需要进行排序的数组，数组里面的元素全都是同类型的对象]
  * @param  {[排序标识]} ordermark   [对象数组中用来进行排序的唯一标识符字段，必须是数字，需要定义后传入]
- * @param  {[排序标识]} mark   		[升序或者降序，1升序，0，降序]
+ * @param  {[排序标识]} boolean   	[升序或者降序，默认降序,true升序]
  * @return {[数组]}     			[排序后的数组]
  */
-function buddleObjectSort(arr,ordermark,mark){
-	if(mark==1){
+function buddleObjectSort(arr,ordermark,boolean){
+	if(boolean){
 		for(var i=0;i<arr.length;i++){
 			for(var j=i+1;j<arr.length;j++){
 				if(parseInt(arr[i].ordermark) > parseInt(arr[j].ordermark)){
