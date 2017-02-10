@@ -41,6 +41,23 @@
 				return true;
 			}
 			return false;
+		},
+		portExcel:function(params){
+			if(!params || !params.url){
+				console.log("excel数据源为空");
+				return;
+			}
+			var excelForm = document.createElement("form");
+			document.body.appendChild(excelForm);
+			excelForm.method = params.method  ? params.method : "post";
+			excelForm.action = params.url;
+			//创建隐藏表单
+			var hideInput = document.createElement("input");
+			hideInput.setAttribute("name","id");
+			hideInput.setAttribute("type","hidden");
+			hideInput.setAttribute("value",params.value ? params.value : 1);
+			excelForm.appendChild(hideInput);
+			excelForm.submit();
 		}
 	});
 })(window.jQuery);
