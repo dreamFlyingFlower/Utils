@@ -8,7 +8,7 @@
  	var Ualert = document.createElement('DIV');
  	Ualert.id = 'Ualert';
  	Ualert.className = 'Ualert';
- 	strHtml = "<ul style='list-style:none;margin:0px;padding:0px;width:100%'>";
+ 	strHtml = "<ul style='list-style:none;margin:0;padding:0;width:100%'>";
 	strHtml += " <li>[系统提示]</li>";
 	strHtml += " <li style='background:#fff;text-align:center;font-size:12px;height:120px;line-height:120px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;'>"+txt+"</li>";
 	strHtml += " <li style='background:#FDEEF4;text-align:center;font-weight:bold;height:25px;line-height:25px; border:1px solid #F9CADE;'><input type='button' value='确 定' onclick='doOk()' /></li>";
@@ -529,4 +529,66 @@ function keyStorage(index,boolean){
 	}else{
 		return localStorage.key(index);
 	}
+}
+/**
+ * [popAlert 弹出层]
+ * @param  {[type]} content  [需要显示的内容]
+ * @param  {[type]} interval [显示的时间]
+ */
+function popAlert(content,interval){
+	content = content ? content : "发生错误";
+    var pop = document.getElementById("pop");
+    var contents = document.getElementById("contents");
+    if (!pop) {
+        pop = document.createElement("div");
+        pop.id = "pop";
+        pop.style.position = "absolute";
+        pop.style.top = 0;
+        pop.style.left = 0;
+        pop.style.width = "100%";
+        pop.style.height = "100%";
+        pop.style.opacity = 0.5;
+        pop.style.filter = "Alpha(opacity=30)";
+        pop.style.zIndex = 9999;
+        pop.style.backgroundColor = "gray";
+        contents = document.createElement("div");
+        contents.id = "contents";
+        contents.style.position = "absolute";
+        contents.style.left = "50%";
+        contents.style.width = "300px";
+        contents.style.marginLeft = "-150px";
+        contents.style.top = "50%";
+        contents.style.height = "150px";
+        contents.style.marginTop = "-100px";
+        contents.style.textAlign = "center";
+        contents.style.zIndex = 10000;
+        contents.style.backgroundColor = "#fff";
+        var a = document.createElement("a");
+        a.id = "message";
+        a.innerHTML = content;
+        a.style.width = "300px";
+        a.style.height = "150px";
+        a.style.display = "table-cell";
+        a.style.verticalAlign = "middle";
+        a.style.wordBreak = "break-all";
+        contents.appendChild(a);
+        document.body.appendChild(contents);
+        document.body.appendChild(pop);
+    } else {
+        var msg = document.getElementById("message");
+        msg.innerHTML = content;
+        pop.style.display = "block";
+        contents.style.display = "block";
+    }
+    time = time ? time : 2;
+    var popTime = setTimeout(function () {
+        pop.style.display = "none";
+        contents.style.display = "none";
+        window.clearTimeout(popTime);
+    }, time * 1000);
+    document.onclick = function (e) {
+        e.stopPropagation();
+        pop.style.display = "none";
+        contents.style.display = "none";
+    };
 }
