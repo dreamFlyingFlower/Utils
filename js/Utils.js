@@ -62,6 +62,53 @@ function getFlashTime(){
 	return nowTime;
 }
 /**
+ * [getDay 获取格式化时间]
+ * @param  {[type]} timestamp   [时间毫秒数]
+ * @param  {[type]} format 		[时间分隔符]
+ * @param  {[type]} ishms  		[是否带时分秒,默认为false]
+ * @param  {[type]} isweek 		[是否带周]
+ * @return {[type]}        		[指定时间]
+ */
+function getDay(format,ishms,timestamp,isweek){
+	var time = typeof timestamp === "number" ? new Date(timestamp) : new Date();
+	var ymd = time.toLocaleDateString();
+	var week = time.getDay();//周
+	var hour = time.getHours();//时
+	var minutes = time.getMinutes();
+	var second = time.getSeconds();
+	ymd = format ? ymd.replace(/[^\d]/g,format) : ymd;
+	var Week = "";
+	if(isweek){
+		switch(week){
+			case 0:
+				Week = "星期天";
+				break;
+			case 1:
+				Week = "星期一";
+				break;
+			case 2:
+				Week = "星期二";
+				break;
+			case 3:
+				Week = "星期三";
+				break;
+			case 4:
+				Week = "星期四";
+				break;
+			case 5:
+				Week = "星期五";
+				break;
+			case 6:
+				Week = "星期六";
+				break;
+		}
+
+	}
+	if(!ishms){
+		return ymd + " " + hour+":"+minutes+":"+second + Week;
+	}
+}
+/**
  * [loadOwnJs 加载其他js工具类]
  * @param  {[string]} url [需要加载的js地址]
  * @return {[无]}     [无]

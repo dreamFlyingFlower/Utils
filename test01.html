@@ -33,35 +33,26 @@
 	</div>
 	<script  type="text/javascript">
 		$(function(){
-			var p = document.getElementById("p");
-			p.value = "真的?";
-			var a1 = document.getElementById("a1");
-			a1.onclick = function(){
-				console.log(111);
-			};
-			var o = {
-				"key33":"ere",
-				"key343":"rer"
-			};
-			var dada= "2017-02-24T15:50:08";
-			console.log(dada.replace(/T/g," "));
 			console.log(new Date().toLocaleDateString());
+			console.log(new Date().toLocaleTimeString());
 			console.log(new Date().toDateString());
 			console.log(new Date().toUTCString());
 			console.log(new Date().toLocaleString());
 			console.log(new Date().toTimeString());
 			console.log(new Date().getTimezoneOffset());
 			console.log(new Date().toString());
+			console.log(new Date().getDate());
+			console.log(new Date().getDay());
 			sessionStorage.setItem("key1","valuw1");
 			sessionStorage.setItem("key2","valuw3");
 			sessionStorage.setItem("key5","valuw4");
-			localStorage.setItem("key1",JSON.stringify(o));
 			localStorage.setItem("key2","valuw31");
 			localStorage.setItem("key5","valuw41");
 			sessionStorage.removeItem("key1");
 			console.log(sessionStorage.key(1));
 			console.log(sessionStorage.getItem("key1"));
 			console.log(JSON.parse(localStorage.getItem("key1")));
+			console.log();
 		});
 	</script>
 </body>
