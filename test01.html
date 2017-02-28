@@ -27,7 +27,9 @@
 		</div>
 		<input id="p" style="width:500px;" value="请选择">
 		<table id="t1" style="width:502px"></table>
-		<input type="text" id="p" placeholder="这是一个test">
+		<input type="file" id="p" placeholder="这是一个test">
+		<div id="fdsfds" style="position: absolute;top: 1000px;width: 1000px;height: 1000px;background-color: purple;">
+		</div>
 	</div>
 	<script  type="text/javascript">
 		$(function(){
@@ -41,6 +43,8 @@
 				"key33":"ere",
 				"key343":"rer"
 			};
+			var dada= "2017-02-24T15:50:08";
+			console.log(dada.replace(/T/g," "));
 			console.log(new Date().toLocaleDateString());
 			console.log(new Date().toDateString());
 			console.log(new Date().toUTCString());
