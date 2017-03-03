@@ -639,3 +639,28 @@ function popAlert(content,interval){
         contents.style.display = "none";
     };
 }
+/**
+ * [picMove 元素移动,需修改]
+ * @param  {[type]} element [需要移动的元素]
+ * @return {[type]}         [description]
+ */
+function picMove(element){
+	var width = document.body.clientWidth;
+	var height = document.body.clientHeight;
+	var x,y;
+	element.onmousedown = function(e){
+		element.style.position = 'absolute';
+		x = e.clientX + document.body.scrollLeft- element.offsetLeft;
+		y = e.clientY + document.body.scrollTop- element.offsetTop;
+		move();
+	};
+	function move(){
+		element.onmousemove = function(e){
+			element.style.left = e.clientX  - x + "px";
+			element.style.top = e.clientY  -y + "px";
+		};
+	}
+	element.onmouseup = function(){
+		element.onmousemove = null;
+	};
+}
