@@ -664,3 +664,47 @@ function picMove(element){
 		element.onmousemove = null;
 	};
 }
+//执行懒加载
+window.addEventListener('scroll', throttle(lazyLoad, 500, 1000), false);
+/**
+ * [lazyLoad 图片懒加载]
+ * @return {[type]} [description]
+ */
+function lazyLoad(){
+	var images = document.getElementsByTagName('img');
+	var length = images.length;
+	var n=0;
+	return function(){
+		var seeHeight = document.documentElement.clientHeight;
+		var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+		for (var i = n; i < length; i++) {
+			if(images[i].offsetTop < seeHeight + scrollHeight){
+				if(images[i].getAttribute('src') === 'images/loading.gif') {
+			    	images[i].src = images[i].getAttribute('data-src');
+		        }
+			}
+			n++;
+		}
+	};
+}
+/**
+ * [throttle 函数节流,避免无节制加载事件]
+ * @param  {Function} fn      [执行函数]
+ * @param  {[type]}   delay   [延迟执行]
+ * @param  {[type]}   atleast [间隔时间]
+ * @return {[type]}           [description]
+ */
+function throttle(fn, delay, atleast) {
+    var timeout = null,
+	startTime = new Date();
+    return function() {
+		var curTime = new Date();
+		clearTimeout(timeout);
+		if(curTime - startTime >= atleast) {
+		    fn();
+		    startTime = curTime;
+		}else {
+		    timeout = setTimeout(fn, delay);
+		}
+    };
+}
