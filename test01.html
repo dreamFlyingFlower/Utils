@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/common.css">
 	<script src="js/jquery.min.js" type="text/javascript" ></script>
 	<script src="js/Utils.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/JqueryFuncs.js"></script>
 	<style type="text/css" media="screen">
 		nav ul li a{
 			font-size: 1rem;
@@ -43,6 +44,7 @@
 			console.log(new Date().toString());
 			console.log(new Date().getDate());
 			console.log(new Date().getDay());
+			console.log(Date.parse("2017-2-5"));
 			sessionStorage.setItem("key1","valuw1");
 			sessionStorage.setItem("key2","valuw3");
 			sessionStorage.setItem("key5","valuw4");
@@ -53,6 +55,7 @@
 			console.log(sessionStorage.getItem("key1"));
 			console.log(JSON.parse(localStorage.getItem("key1")));
 			console.log(1111);
+			console.log($.bd_decrypt(114.079922,22.534729));
 		});
 	</script>
 </body>
