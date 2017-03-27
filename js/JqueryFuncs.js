@@ -89,7 +89,7 @@
 	            Lng += dlng;
 	            Lat += dlat;
             }
-            return lngs + "," + lats;
+            return {lng:lngs ,lat:lats};
         },
         //判断是否在中国
         isChina:function(lat,lon){
