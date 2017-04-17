@@ -88,7 +88,7 @@
 			}
 		},
 		/**
-		 * [dateDiff 计算2个事件单一单位的时间差]
+		 * [dateDiff 计算2个时间单一单位的时间差]
 		 * @param  {[number]} strInterval [单位]
 		 * @param  {[string]} beginTime   [开始时间字符串]
 		 * @param  {[string]} endTime     [结束时间字符串]
