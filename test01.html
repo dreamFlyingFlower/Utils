@@ -51,6 +51,15 @@
 			localStorage.setItem("key2","valuw31");
 			localStorage.setItem("key5","valuw41");
 			sessionStorage.removeItem("key1");
+			$("#t1").wheel(
+				function(){
+					console.log("+++");
+				},
+				function(){
+					console.log("---");
+				}
+			);
+			console.log($.transfromFromWGSToBDJ(114.068266999355,22.5316958234101));
 		});
 	</script>
 </body>

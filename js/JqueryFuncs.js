@@ -15,6 +15,20 @@
 				var $this = $(this);
 				//需要进行的操作
 			});
+		},
+		//滚轮事件,兼容fix和其他,滚轮触发一次的大小为120
+		wheel:function(callback,callback1){
+			return this.each(function(){
+				var $this = $(this);
+				$(document).on("mousewheel DOMMouseScroll",function(e){
+					var delta =(e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));
+					 if(delta > 0){
+					 	callback();
+					 }else{
+					 	callback1();
+					 }
+				});
+			});
 		}
 	});
 	//直接使用$.来调用
@@ -138,6 +152,19 @@
             latResult = latResult + (20.0 * Math.sin(y * PI) + 40.0 * Math.sin(y / 3.0 * PI)) * 2.0 / 3.0;
             latResult = latResult + (160.0 * Math.sin(y / 12.0 * PI) + 320 * Math.sin(y * PI / 30.0)) * 2.0 / 3.0;
             return latResult;
+        },
+        //将真是经纬度转百度经纬度
+        transfromFromWGSToBDJ: function (lng,lat) {
+            var a = 6378245.0;
+            var ee = 0.00669342162296594323;
+            var x_pi = PI * 3000.0 / 180.0;
+            var lnglat = $.calculate(lng, lat);
+            var lngs = lnglat[0], lats = lnglat[1];
+            var sqrtMagic = Math.sqrt(lngs * lngs + lats * lats) + 0.00002 * Math.sin(lats * x_pi);
+            var magic = Math.atan2(lats, lngs) + 0.000003 * Math.cos(lngs * x_pi);
+            var dlng = sqrtMagic*Math.cos(magic)+0.0065;
+            var dlat = sqrtMagic*Math.sin(magic)+ 0.006;
+            return {lng:dlng,lat:dlat};
         }
 	});
 })(window.jQuery);

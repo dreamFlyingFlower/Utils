@@ -1,6 +1,28 @@
 /*!
  * 工具类，不需引入jquery，可能存在不兼容问题
  */
+/**
+ * [getXmlhttp 获得ajax链接]
+ */
+function getXmlhttp(){
+	var xmlhttp;
+	try{
+		xmlhttp = new XMLHttpRequest();
+	}catch(e){
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+	}
+	xmlhttp.open("post","url");
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			console.log(xmlhttp.responseText);
+		}
+	};
+	xmlhttp.send();
+}
+/**
+ * [Ualert 弹出框]
+ * @param {[type]} txt [description]
+ */
  function Ualert(txt){
  	var shield = document.createElement('DIV');
  	shield.id = 'shield';
