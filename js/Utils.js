@@ -317,6 +317,34 @@ function serialize(form){
 	}
 	return parts.join("&");
 }
+function loadForm(Data){
+	var data = Data;
+	if("string" === typeof Data){
+		data = JSON.parse(Data);
+	}
+	var tagName,type,arr,value;
+	for(var key in data){
+		value = data[key];
+		$("[name='"+key+"'']").each(function(){
+			tagName = $(this)[0].tagName;
+			type = $(this).attr("type");
+			if("input" == tagName){
+				if("radio" == type){
+					$(this).attr("checked",$(this).val() == data[key]);
+				}else if("checkbox" == type){
+					arr = value.split(",");
+					for (var i = 0; i < arr.length; i++) {
+						if(arr[i] == $(this).val()){
+							$(this).attr(checked,true);
+						}
+					}
+				}
+			}else if(tagName == "select" || tagName =="textarea"){
+				$(this).val(value);
+			}
+		});
+	}
+}
 /**
  * [addURLParam 发送get请求时，会将查询的字符串追加到URL末尾，而URL必须经过正确的编码才行。查询字符串中的键值对都必须经过encodeURLComponent进行编码，每一对键值对都由和号(&)分开]
  * @param {[type]} url   [需要经过编码的URL请求]

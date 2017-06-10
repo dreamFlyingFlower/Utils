@@ -129,8 +129,8 @@
             var sqrtMagic = Math.sqrt(magic);
             dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * PI);
             dlng = (dlng * 180.0) / (a / sqrtMagic * Math.cos(radLat) * PI);
-            var lats = lat + dLat;
-            var lngs = lng + dlng;
+            var lats = parseFloat(lat) + dLat;
+            var lngs = parseFloat(lng) + dlng;
             resultArr.push(lngs);
             resultArr.push(lats);
             return resultArr;
@@ -159,7 +159,7 @@
             var ee = 0.00669342162296594323;
             var x_pi = PI * 3000.0 / 180.0;
             var lnglat = $.calculate(lng, lat);
-            var lngs = lnglat[0], lats = lnglat[1];
+            var lngs = parseFloat(lnglat[0]), lats = parseFloat(lnglat[1]);
             var sqrtMagic = Math.sqrt(lngs * lngs + lats * lats) + 0.00002 * Math.sin(lats * x_pi);
             var magic = Math.atan2(lats, lngs) + 0.000003 * Math.cos(lngs * x_pi);
             var dlng = sqrtMagic*Math.cos(magic)+0.0065;
