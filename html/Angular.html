@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" ng-app="app">
+<html lang="zh-CN" ng-app="app" ng-controller="app">
 <head>
 	<meta charset="utf-8">
 	<!-- 可以让部分国产浏览器默认采用高速模式渲染页面,即google -->
@@ -19,32 +19,37 @@
 	<meta name="author" content="">
 	<title>标准html5页面</title>
 	<link rel="stylesheet" href="">
-	<script src="angular-1.6.1/angular.min.js"></script>
-	<style type="text/css" media="screen">
-		body{
-			margin: 0;
-			padding: 0;
-			background-image: url(../images/201702151451211820.jpg);
-			background: url(../images/201702151451211820.jpg) center 0 cover ;
-			position:absolute;
-			top:0;
-			left:0;
-			height:100%;
-			width:100%;
-			background-position: center 0;
-			background-repeat: no-repeat;
-			background-attachment:fixed;
-			background-size: cover;
-			-webkit-background-size: cover; /*兼容Webkit内核浏览器如Chrome和Safari*/
-			-o-background-size: cover;/* 兼容Opera*/
-			zoom: 1;
-		}
-	</style>
+	<script src="../plugins/angular-1.6.1/angular.min.js"></script>
 </head>
 <body>
 	<input type="text" name="" value="" placeholder="" ng-model="username">
 	<input type="text" name="" value="" placeholder="" ng-model="nickname">
+	<!-- 使用ng-bind和直接使用{{}}效果等同 -->
 	<p>{{username + ":" + nickname}}</p>
+	<p ng-bind="username +':'+ nickname"></p>
+	<textarea name="" ng-model="comment"></textarea>
+	<p>{{comment}}</p>
+	<!-- ng-model只对input等输入标签有效 -->
+	<p ng-model="test01" ng-init="test01=123456"></p>
+	<p>{{test01}}</p>
+	<!-- ng-options 数组和对象数组-->
+	<select id="select"  ng-model="newse"   ng-init="newse=array[0]" ng-options=" x.label for x in array">
+	</select>
+	<p>{{newse.label}}{{newse.value}}</p>
+	<!-- ng-options 对象为数据源,而非对象数组 -->
+	<select id="select2"  ng-model="newse2"   ng-init="newse2=array2[0].x" ng-options=" x for (x,y) in array2">
+	</select>
+	<p>{{newse2}}</p>
+	<p>普通</p>
+	<select id="common" >
+		<option value="label5" selected>l5</option>
+		<option value="label6">l6</option>
+		<option value="label7">l7</option>
+	</select>
+	<!-- checkbox中的ng-model直接赋值给了checked,而不是value -->
+	<input id="inpt" type="checkbox" name="" value="" ng-model="check">点击我
+	<p>{{check}}</p>
+
 	<input type="text" name="" value="" placeholder="" ng-init="password=123456" ng-model="password">
 	<p>{{password}}</p>
 	<fieldset>
@@ -54,8 +59,47 @@
         <label><input type="radio" name="select" value=" " /></label>速度曲线
 	</fieldset>
 	<script>
+		// 若是ng-app赋值了,则必须在js中进行初始化,若不想初始化则不必对ng-app赋值,直接用空字符串
+		// app的初始化不能写在windo.onload方法里面
 		var app = angular.module('app', []);
+		// controller必须初始化,否则报错,且不能写在window.onload方法里,也不能写在其他方法里,异步执行
+		app.controller('app', function($scope){
+			// ng-options中输入的不论是对象数组还是基础数组,在ng-init的时候只需要取数组下标值,即便是对象数组也不需要.属性
+			// ng-options选中的值(x)会自动赋值到绑定的ng-model中
+			$scope.array1=["l1","l2","l3"];
+			$scope.array=[{label:"label1",value:"l1"},{label:"label2",value:"l2"},{label:"label3",value:"l3"}];
+			//当在select标签中使用了ng-init时,js中赋值会被覆盖,即标签赋值优先级高,奇怪的现象
+			$scope.newse = $scope.array[2];
+			//若是赋值不在原数组中,则显示为空
+			$scope.newse = {label:"label4",value:"l4"};
+			//无法和原生一样取到所有options,无法获取options里的值
+			console.log(selects.options);
+			//无法和原生一样取得当前选中值
+			console.log(selects.value);
+			//若是使用对象,而不是对象数组则可正常加载
+			$scope.array2={label8:"l8",lable9:"l9",lable10:"l10"};
+		});
+		//此处执行和controller为异步执行
+		var selects = document.getElementById("select");
+		console.log(selects.value);
+		var common = document.getElementById("common");
+		console.log(common.options);
+		console.log(common.value);
 		var password = 'Jiayu2Gps@wan';
+		window.onload=function(){
+			//ng-options的选项为对象数组时,无法通过原生获得当前选中值
+			var sss = document.getElementById("select");
+			console.log(sss.value);
+			//ng-options的选项为对象时,获得的值会加上数据类型
+			var sss2 = document.getElementById("select2");
+			sss2.onchange=function(){
+				console.log(sss2.value);
+			};
+			var intp = document.getElementById("inpt");
+			intp.onclick = function(){
+				alert(this.value+this.checked);
+			};
+		};
 	</script>
 </body>
 </html>
