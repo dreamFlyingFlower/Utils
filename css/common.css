@@ -1,11 +1,8 @@
-body,html{
-	/**
-	 * [font 字体设置]
-	 * 样式,粗细,大小/行高,字体系列
-	 */
+html,body{
+	/*样式,粗细,大小/行高,字体系列*/
 	font:1.2rem Arial,"微软雅黑","宋体";
 }
-html,ul,li,img,p,textarea{
+html,body,ul,li,img,p,textarea{
 	margin:0;
 	padding:0;
 }
@@ -15,10 +12,17 @@ li{
 a{
 	text-decoration: none;
 }
+/* 清除浮动 */
 .clearfix:after{
 	clear: both;
 }
 .clearfix:before,.clearfix:after{
 	display: block;
 	content: "";
+}
+/* 字体超长自动省略号,不换行 */
+.ellipsis{
+	white-space: nowrap;/*元素内容不能自动换行*/
+	overflow: hidden;
+	text-overflow:ellipsis;/*溢出省略号*/
 }
