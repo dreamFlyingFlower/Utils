@@ -1,6 +1,8 @@
 html,body{
 	/*样式,粗细,大小/行高,字体系列*/
 	font:1.2rem Arial,"微软雅黑","宋体";
+	width:100%;
+	height:100%;
 }
 html,body,ul,li,img,p,textarea{
 	margin:0;
